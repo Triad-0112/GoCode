@@ -1,0 +1,2 @@
+# GoCode
+Practice GO Process
