@@ -8,19 +8,19 @@ type Queue interface {
 	Keys() []interface{}
 }
 
-type QueueP struct {
+type Data struct {
 	size int
 	data []interface{}
 }
 
-func New(size int) *QueueP {
-	return &QueueP{
+func New(size int) *Data {
+	return &Data{
 		size: size,
 	}
 }
 
 // Push values
-func (q *QueueP) Push(n interface{}) *QueueP {
+func (q *Data) Push(n interface{}) *Data {
 	if q.Len() < q.size {
 		q.data = append(q.data, n)
 	} else {
@@ -31,12 +31,12 @@ func (q *QueueP) Push(n interface{}) *QueueP {
 }
 
 //Keys, Show current values with fixed size
-func (q *QueueP) Keys() []interface{} {
+func (q *Data) Keys() []interface{} {
 	return q.data
 }
 
-//Check the queue logic condition if it was fullfilled or no
-func (q *QueueP) Contains(key interface{}) bool {
+//Check the queue logic condition if it was fullfilled or no by checking the existence of item
+func (q *Data) Contains(key interface{}) bool {
 	cond := false
 	for i := 0; i < q.Len(); i++ {
 		if q.data[i] == key {
@@ -47,17 +47,17 @@ func (q *QueueP) Contains(key interface{}) bool {
 }
 
 //Len
-func (q *QueueP) Len() int {
+func (q *Data) Len() int {
 	return len(q.data)
 }
 
 //Pop
-func (q *QueueP) Pop() interface{} {
+func (q *Data) Pop() interface{} {
 	if len(q.data) == 0 {
 		return 0
+	} else {
+		element := q.data[0]
+		q.data = q.data[1:]
+		return element
 	}
-	element := q.data[0]
-	q.data = q.data[1:]
-	return element
 }
-
