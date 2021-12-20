@@ -13,12 +13,6 @@ type Data struct {
 	data []interface{}
 }
 
-func New(size int) *Data {
-	return &Data{
-		size: size,
-	}
-}
-
 // Push values
 func (q *Data) Push(n interface{}) *Data {
 	if q.Len() < q.size {
@@ -30,9 +24,15 @@ func (q *Data) Push(n interface{}) *Data {
 	return q
 }
 
-//Keys, Show current values with fixed size
-func (q *Data) Keys() []interface{} {
-	return q.data
+//Pop
+func (q *Data) Pop() interface{} {
+	if len(q.data) == 0 {
+		return 0
+	} else {
+		element := q.data[0]
+		q.data = q.data[1:]
+		return element
+	}
 }
 
 //Check the queue logic condition if it was fullfilled or no by checking the existence of item
@@ -51,13 +51,13 @@ func (q *Data) Len() int {
 	return len(q.data)
 }
 
-//Pop
-func (q *Data) Pop() interface{} {
-	if len(q.data) == 0 {
-		return 0
-	} else {
-		element := q.data[0]
-		q.data = q.data[1:]
-		return element
+//Keys, Show current values with fixed size
+func (q *Data) Keys() []interface{} {
+	return q.data
+}
+
+func New(size int) *Data {
+	return &Data{
+		size: size,
 	}
 }
