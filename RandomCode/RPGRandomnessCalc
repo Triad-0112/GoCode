@@ -1,0 +1,62 @@
+package main
+
+import (
+	"fmt"
+)
+
+//type damager interface {
+//EnemyDamage()
+//OwnDamage()
+//}
+type OwnStatus interface {
+	MyStatus()
+}
+type StatusAdvanced struct {
+	HP         float64
+	ATK        float64
+	DEF        float64
+	CritChance float64
+}
+type Base struct {
+	Name           string
+	Level          int
+	BaseHP         float64
+	BaseATK        float64
+	BaseDEF        float64
+	BaseCritChance float64
+	StatusAdvanced
+	Skill
+}
+type Skill struct {
+	Reflect         bool
+	AbsoluteDefense bool
+	DragonHeart     bool
+	IronBody        bool
+	AssassinLineage bool
+	RoyalLineage    bool
+	WarriorLineage  bool
+	MahaChampion    bool
+}
+
+func (calc Base) MyStatus(Name string, Level float64, BaseHP float64, BaseATK float64, BaseDEF float64, BaseCritical float64) {
+	HP := BaseHP + (float64(Level) * BaseHP * 0.6)
+	ATK := BaseATK + (float64(Level) * BaseATK * 0.4)
+	DEF := BaseDEF + (Level * BaseDEF * 0.3)
+	Critical := BaseCritical + (Level * BaseCritical * 0.2)
+	fmt.Printf("\nHere is status of %s\nHP:\t\t\t %.f\nATK:\t\t\t %.f\nDEF:\t\t\t %.f\nCritical:\t\t %.2f\n\n", Name, HP, ATK, DEF, Critical)
+}
+
+//STATUS
+
+//Main
+func main() {
+	values := Base{
+		Name:           "Reinhard Novus",
+		Level:          100,
+		BaseHP:         89,
+		BaseATK:        15,
+		BaseDEF:        31,
+		BaseCritChance: 2,
+	}
+	values.MyStatus(values.Name, float64(values.Level), values.BaseHP, values.BaseATK, values.BaseDEF, values.BaseCritChance)
+}
