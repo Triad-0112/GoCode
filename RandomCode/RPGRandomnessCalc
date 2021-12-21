@@ -11,12 +11,6 @@ import (
 type OwnStatus interface {
 	MyStatus()
 }
-type StatusAdvanced struct {
-	HP         float64
-	ATK        float64
-	DEF        float64
-	CritChance float64
-}
 type Base struct {
 	Name           string
 	Level          int
@@ -24,7 +18,6 @@ type Base struct {
 	BaseATK        float64
 	BaseDEF        float64
 	BaseCritChance float64
-	StatusAdvanced
 	Skill
 }
 type Skill struct {
