@@ -37,9 +37,10 @@ func main() {
 		short := strings.Split(string(data), "\n")
 		linum := 1 //line start from 1
 		for _, line := range short {
-			// indexing substring using the cli
-			if strings.Index(line, *search) > -1 {
-				if strings.Index(filext, "text/plain") > -1 {
+			// check logic if string in search var is exist in the file
+			if strings.Contains(line, *search) {
+				//for double check, checking extension
+				if strings.Contains(filext, "text/plain") {
 					fmt.Printf("[%s] Line %d:\t %s\n", file.Name(), linum, line)
 				} else {
 					fmt.Println("Nil")
