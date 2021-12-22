@@ -56,10 +56,16 @@ func main() {
 			if strings.Contains(line, *search) {
 				//for double check, checking extension
 				if strings.Contains(filext, "text/plain") {
-					line := line[:75]
-					filecol.Printf("[%s]:\n", file.Name())
-					linucol.Printf("\tLine-%d: ", linum)
-					linecol.Printf("\n\t%s...\n", line)
+					if len(line) > 75 {
+						line = line[:75]
+						filecol.Printf("[%s]:\n", file.Name())
+						linucol.Printf("\tLine-%d: ", linum)
+						linecol.Printf("\n\t%s...\n", line)
+					} else {
+						filecol.Printf("[%s]:\n", file.Name())
+						linucol.Printf("\tLine-%d: ", linum)
+						linecol.Printf("\n\t%s\n", line)
+					}
 				} else {
 					fmt.Println("Nil")
 					break
